@@ -7,6 +7,7 @@ http://cgmdemo-env.eba-gffs6ibe.eu-central-1.elasticbeanstalk.com/#/
 * Backend
   * More JUnit-Tests
   * Use DTO`s in RestServices instead of entities
+  * Secure and auth
 * Frontend
   * Technical
     * Jest Tests
