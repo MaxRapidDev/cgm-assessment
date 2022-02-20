@@ -44,7 +44,7 @@
 
         <v-card-actions>
           <v-spacer/>
-          <v-btn type="submit" :loading="submiting">Speichern</v-btn>
+          <v-btn type="submit" :loading="submiting">Save</v-btn>
         </v-card-actions>
       </v-form>
     </v-container>
