@@ -1,6 +1,7 @@
 # cgm-assessment
-Demo:
-https://cgmdemo-env.eba-gffs6ibe.eu-central-1.elasticbeanstalk.com/
+
+## Demo
+http://cgmdemo-env.eba-gffs6ibe.eu-central-1.elasticbeanstalk.com/#/
 
 ## TODO`s:
 * Backend
