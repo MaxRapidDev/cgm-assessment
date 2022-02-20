@@ -95,7 +95,8 @@ export default {
         return this.value.substring(11, 16)
       },
       set(val) {
-        console.log(val);
+        const newValue = this.value.substring(0, 11) + val + this.value.substring(16);
+        this.$emit('input', newValue)
       }
     }
   },
