@@ -1,21 +1,21 @@
 package info.maxdev.cgm.visit;
 
-import info.maxdev.cgm.patient.Patient;
-
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
+import javax.ws.rs.core.Response;
 
+/**
+ * The API for visits
+ */
 @Path("/api/v1/visits")
 public class VisitRessource {
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Patient> list() {
-        return Visit.listAll();
-    }
-
+    /**
+     * Provides a specific Visit
+     *
+     * @param id the visit id
+     * @return the visit object
+     */
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -23,18 +23,31 @@ public class VisitRessource {
         return Visit.findById(id);
     }
 
+    /**
+     * Persist a visit in the database
+     *
+     * @param visit the visit object
+     * @return the persisted visit object with the new id
+     */
     @POST
     @Transactional
-    public Visit create(Visit visit) {
+    public Response create(Visit visit) {
+        visit.id = null;
         visit.persist();
-        return visit;
+        return Response.status(Response.Status.CREATED).entity(visit).build();
     }
 
+    /**
+     * Updates a visit object in the database
+     *
+     * @param visit the visit object
+     * @return the persisted visit object with the new id
+     */
     @PUT
     @Transactional
     public Visit update(Visit visit) {
         Visit entity = Visit.findById(visit.id);
-        if(entity == null) {
+        if (entity == null) {
             throw new NotFoundException();
         }
 
@@ -46,6 +59,11 @@ public class VisitRessource {
         return entity;
     }
 
+    /**
+     * Deletes a visit in the database
+     *
+     * @param id the visit id
+     */
     @DELETE
     @Path("/{id}")
     @Transactional
