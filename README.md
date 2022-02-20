@@ -13,7 +13,7 @@ http://cgmdemo-env.eba-gffs6ibe.eu-central-1.elasticbeanstalk.com/#/
     * Jest Tests
     * E2E Tests
     * Storybook
-    * Comment tha components
+    * Document the components
     * API and Entities in Webapp as TypeScript
   * UI
     * Dirty-protection for unsaved changes in forms
