@@ -31,10 +31,10 @@ public class VisitRessource {
      */
     @POST
     @Transactional
-    public Response create(Visit visit) {
+    public Visit create(Visit visit) {
         visit.id = null;
         visit.persist();
-        return Response.status(Response.Status.CREATED).entity(visit).build();
+        return visit;
     }
 
     /**

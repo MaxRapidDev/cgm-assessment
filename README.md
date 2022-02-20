@@ -11,9 +11,11 @@ https://cgmdemo-env.eba-gffs6ibe.eu-central-1.elasticbeanstalk.com/
     * Jest Tests
     * E2E Tests
     * Storybook
+    * Comment tha components
     * API and Entities in Webapp as TypeScript
   * UI
-    * Dirtyprotection for unsaved changes in forms  
+    * Dirty-protection for unsaved changes in forms
+    * Hande serverside errors at rest calls
 
 ## Running the application in dev mode
 

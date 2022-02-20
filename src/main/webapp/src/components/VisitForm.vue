@@ -44,7 +44,7 @@
 
         <v-card-actions>
           <v-spacer/>
-          <v-btn type="submit">Speichern</v-btn>
+          <v-btn type="submit" :loading="submiting">Speichern</v-btn>
         </v-card-actions>
       </v-form>
     </v-container>
@@ -59,6 +59,9 @@ export default {
   name: "VisitForm",
   components: {DateTimeInput},
   props: {
+    submitFct:{
+      type: Function,
+    },
     visit: {
       type: Object,
     },
@@ -67,6 +70,7 @@ export default {
     },
   },
   data: () => ({
+    submiting: false,
     valid: true,
     rules: {
       date: [v => !!v || 'Date is required'],
@@ -84,10 +88,27 @@ export default {
     ]
   }),
   methods: {
-    submit() {
+    async submit() {
       const valid = this.$refs.form.validate()
       if (valid) {
-        this.$emit('submit', this.form)
+        this.submiting = true;
+        await this.submitFct(this.form)
+
+        this.$toast.success("Successfull saved", {
+          position: "top-right",
+          timeout: 5000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false
+        });
+        this.submiting = false;
       }
     }
   },

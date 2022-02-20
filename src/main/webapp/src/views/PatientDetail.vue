@@ -3,18 +3,18 @@
     <v-row>
       <v-col>
         <v-card rounded="lg" :loading="loading">
-         <v-container>
-           <v-row>
-             <v-col cols="auto">
-                 <v-img :width="100" :height="100" contain :src="patient.imageurl" v-if="patient.imageurl"/>
-             </v-col>
-             <v-col>
-               <h1>{{patient.name}} {{patient.surname}}</h1>
-               <div>{{new Date(patient.dateOfBirth).toLocaleDateString()}}</div>
-               <div>{{patient.socialSecurityNumber}}</div>
-             </v-col>
-           </v-row>
-         </v-container>
+          <v-container v-if="patient">
+            <v-row>
+              <v-col cols="auto">
+                <v-img :width="100" :height="100" contain :src="patient.imageurl" v-if="patient.imageurl"/>
+              </v-col>
+              <v-col>
+                <h1>{{ patient.name }} {{ patient.surname }}</h1>
+                <div>{{ new Date(patient.dateOfBirth).toLocaleDateString() }}</div>
+                <div>{{ patient.socialSecurityNumber }}</div>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card>
       </v-col>
     </v-row>
@@ -32,13 +32,15 @@
               :hide-default-footer="true"
               :items-per-page="Number.MAX_SAFE_INTEGER"
               v-model="selected"
+              :loading="loading"
               @click:row="clickRow"
           >
             <template #item.reason="{ item }">
               {{ item.reason.domainId }}
             </template>
             <template #item.date="{ item }">
-              {{ new Date(item.date).toLocaleDateString()}} - {{new Date(item.date).toLocaleTimeString().substring(0,5)}}
+              {{ new Date(item.date).toLocaleDateString() }} -
+              {{ new Date(item.date).toLocaleTimeString().substring(0, 5) }}
             </template>
           </v-data-table>
 
@@ -58,10 +60,10 @@
       </v-col>
 
       <v-col>
-          <visit-form
-              :visit="selectedVisit"
-              :visitreasons="visitreasons"
-              @submit="submit"/>
+        <visit-form
+            :visit="selectedVisit"
+            :visitreasons="visitreasons"
+            :submitFct="submit" />
       </v-col>
     </v-row>
   </div>
@@ -80,6 +82,7 @@ export default {
     visitreasons: [],
     patient: null,
     loading: true,
+    submiting: false,
     headers: [
       {text: 'Reason', value: 'reason'},
       {text: 'Date', value: 'date'},
@@ -99,30 +102,30 @@ export default {
   },
   methods: {
     clickRow(item) {
-      if( item.id === this.visitid) return;
+      if (item.id === this.visitid) return;
       this.$router.push({
         name: this.$route.name,
         params: {patientid: this.patientid, visitid: item.id},
       });
     },
-    async submit(form){
+    async submit(form) {
       const update = !!form.id;
       const newData = [...this.vistits];
 
       const {data} = await this.$api.visits.updateOrCreate({...form, patient: this.patient});
-      if(update){
-        const index=newData.findIndex(item => item.id === form.id);
+      if (update) {
+        const index = newData.findIndex(item => item.id === form.id);
         newData[index] = data;
-      }else{
+      } else {
         newData.push(data);
         this.clickRow(data);
       }
 
-      newData.sort(function(a,b){
+      newData.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
 
-      this.vistits=newData;
+      this.vistits = newData;
     },
   },
   watch: {
@@ -145,7 +148,7 @@ export default {
     },
     selectedVisit: {
       async handler(selectedVisit) {
-        this.selected=[selectedVisit];
+        this.selected = [selectedVisit];
       },
       immediate: true
     }

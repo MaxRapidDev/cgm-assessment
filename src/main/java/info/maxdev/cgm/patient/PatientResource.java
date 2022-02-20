@@ -62,9 +62,9 @@ public class PatientResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPatient(Patient patient) {
+    public Patient createPatient(Patient patient) {
         patient.id = null;
         patient.persist();
-        return Response.status(Status.CREATED).entity(patient).build();
+        return patient;
     }
 }

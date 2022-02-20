@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import CKEditor from '@ckeditor/ckeditor5-vue2';
 import api from "@/api/v1/api";
+import "./plugins/toast"
 
 Vue.config.productionTip = false
 
@@ -11,7 +12,7 @@ Vue.use( CKEditor );
 
 Vue.prototype.$api=api;
 Date.prototype.toJSON=function(){
-  return this.toISOString().substring(0,19)
+  return this.toISOString().substring(0,19);
 }
 
 new Vue({
