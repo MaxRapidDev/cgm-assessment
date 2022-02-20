@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["Patients"],{2887:function(t,e,n){"use strict";n.r(e);var i=function(){var t=this,e=t.$createElement,n=t._self._c||e;return t.patientid?n("router-view"):n("div",[t._v("No patient selected")])},a=[],r={computed:{patientid:function(){return this.$route.params.patientid}}},u=r,o=n("2877"),p=Object(o["a"])(u,i,a,!1,null,null,null);e["default"]=p.exports}}]);
+//# sourceMappingURL=Patients.fc1da3b4.js.map
