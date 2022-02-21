@@ -16,6 +16,7 @@ http://cgmdemo-env.eba-gffs6ibe.eu-central-1.elasticbeanstalk.com/#/
     * Document the components
     * API and Entities in Webapp as TypeScript
   * UI
+    * Responsive design
     * Dirty-protection for unsaved changes in forms
     * Hande serverside errors at rest calls
 
